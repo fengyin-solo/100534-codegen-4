@@ -11,6 +11,30 @@
       </div>
     </header>
 
+    <section class="env-todo">
+      <div class="env-todo-head">
+        <span class="env-todo-title">器物登记待办 · 环境复核项（来自库房环境册）</span>
+        <button class="btn" type="button" @click="loadTodos">刷新待办</button>
+      </div>
+      <p v-if="!todos.length" class="env-todo-empty">暂无环境复核待办，判定完成的超标处置会在这里落成一条复核项。</p>
+      <ul v-else class="env-todo-list">
+        <li v-for="todo in todos" :key="todo.id" class="env-todo-item" :class="{ 'is-done': todo.done }">
+          <div class="env-todo-main">
+            <span>{{ todo.title }}</span>
+            <span class="env-todo-meta">判定批复：{{ todo.judgeNote || '—' }}</span>
+            <span class="env-todo-meta">跟进人：{{ todo.owner }}</span>
+          </div>
+          <div class="env-todo-side">
+            <span v-if="todo.done" class="ok-tag">已复核勾销</span>
+            <span v-else class="warn-tag">待复核</span>
+            <RouterLink class="link" :to="{ path: '/environment', query: { focus: String(todo.disposalId), date: todo.date } }">
+              去处理
+            </RouterLink>
+          </div>
+        </li>
+      </ul>
+    </section>
+
     <div class="stat-row">
       <article v-for="item in stats" :key="item.label" class="stat-card">
         <span class="stat-label">{{ item.label }}</span>
@@ -79,6 +103,8 @@ import {
   moduleMeta,
   runAction as applyAction,
 } from '@/api/local-service'
+import { listTodos } from '@/api/environment-service'
+import type { EnvTodo } from '@/data/environment/types'
 import type { EntryRow } from '@/data/types'
 
 const meta = moduleMeta('find')
@@ -133,5 +159,15 @@ function reload() {
   }
 }
 
-onMounted(reload)
+const todos = ref<EnvTodo[]>([])
+
+function loadTodos() {
+  // 待办由环境册判定环节写入：未复核的排前面，已复核的保留为痕迹。
+  todos.value = listTodos(true)
+}
+
+onMounted(() => {
+  reload()
+  loadTodos()
+})
 </script>
