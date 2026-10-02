@@ -35,3 +35,14 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.board-head { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 10px; }
+.board-cols { display: flex; gap: 12px; align-items: stretch; margin-bottom: 12px; }
+.point-col { flex: 1; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 13px; }
+.point-col h3 { margin: 0 0 6px; font-size: 14px; }
+.point-col p { margin: 4px 0; }
+.col-sub { color: var(--muted); font-size: 12px; }
+.exceed-col { border-color: #f04438; background: #fef3f2; }
+.exceed-col h3 { color: #b42318; }
+.exceed-item { border-top: 1px dashed #f0b8b2; padding: 6px 0; }
+.check-ok { color: #067647; font-size: 12px; }
+.measure-input { width: 150px; padding: 4px 6px; border: 1px solid var(--border); border-radius: 4px; }

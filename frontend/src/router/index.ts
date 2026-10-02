@@ -18,6 +18,7 @@ const Safety = () => import('@/views/safety/index.vue')
 const Packing = () => import('@/views/packing/index.vue')
 const Conserve = () => import('@/views/conserve/index.vue')
 const Briefing = () => import('@/views/briefing/index.vue')
+const Envmon = () => import('@/views/envmon/index.vue')
 const Acceptance = () => import('@/views/acceptance/index.vue')
 
 const router = createRouter({
@@ -41,6 +42,7 @@ const router = createRouter({
     { path: '/packing', name: 'packing', component: Packing },
     { path: '/conserve', name: 'conserve', component: Conserve },
     { path: '/briefing', name: 'briefing', component: Briefing },
+    { path: '/envmon', name: 'envmon', component: Envmon },
     { path: '/acceptance', name: 'acceptance', component: Acceptance },
   ],
 })
